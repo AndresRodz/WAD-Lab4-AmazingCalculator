@@ -83,7 +83,6 @@ resetBtn.addEventListener("click", (event) => {
     console.log("Enter reset");
     validationField.style.display = 'none';
     inputField.value = "";
-    resultField.value = "";
     operands = [];
     operators = [];
     operations = 0;
