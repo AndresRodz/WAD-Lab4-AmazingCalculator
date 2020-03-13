@@ -84,7 +84,6 @@ resetBtn.addEventListener("click", (event) => {
     validationField.style.display = 'none';
     inputField.value = "";
     resultField.value = "";
-    log = "";
     operands = [];
     operators = [];
     operations = 0;
