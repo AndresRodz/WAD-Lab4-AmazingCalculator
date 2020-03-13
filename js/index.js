@@ -5,6 +5,7 @@ let operands = [];
 let operators = [];
 let log = "";
 let operations = 0;
+let result = 0;
 
 //Calculator references
 inputField = document.getElementById("inputNumber");
@@ -28,8 +29,8 @@ addBtn.addEventListener("click", (event) => {
         operands.push(Number(inputField.value));
         operators.push('+');
         operations++;
-        inputField.value = "";
         log += inputField.value + " + ";
+        inputField.value = "";
     }
 });
 
@@ -43,8 +44,8 @@ substractBtn.addEventListener("click", (event) => {
         operands.push(Number(inputField.value));
         operators.push('-');
         operations++;
-        inputField.value = "";
         log += inputField.value + " - ";
+        inputField.value = "";
     }
 });
 
@@ -58,8 +59,8 @@ multiplyBtn.addEventListener("click", (event) => {
         operands.push(Number(inputField.value));
         operators.push('*');
         operations++;
-        inputField.value = "";
         log += inputField.value + " * ";
+        inputField.value = "";
     }
 });
 
@@ -73,8 +74,8 @@ divideBtn.addEventListener("click", (event) => {
         operands.push(Number(inputField.value));
         operators.push('/');
         operations++;
-        inputField.value = "";
         log += inputField.value + " / ";
+        inputField.value = "";
     }
 });
 
@@ -82,16 +83,38 @@ resetBtn.addEventListener("click", (event) => {
     console.log("Enter reset");
     validationField.style.display = 'none';
     inputField.value = "";
-    resultField = "";
+    resultField.value = "";
     log = "";
+    operands = [];
+    operators = [];
+    operations = 0;
 });
 
 equalBtn.addEventListener("click", (event) => {
     console.log("Enter equal");
     validationField.style.display = 'none';
-    inputField.value = "";
-    
-    log += inputField.value + " = ";
-    logField.value = log;
-    log = "";
+    operands.push(Number(inputField.value));
+    operators.push('=');
+    operations++;
+
+    result = operands[0];
+    for(let i = 0; i < operations; i++) {
+        if(operators[i] == '+')
+            result += operands[i+1];
+        else if(operators[i] == '-')
+            result -= operands[i+1];
+        else if(operators[i] == '*')
+            result *= operands[i+1];
+        else if(operators[i] == '/')
+            result /= operands[i+1];
+        else if(operators[i] == '=') {
+            resultField.value = result;
+            log += inputField.value + " = " + result + "\n";
+            logField.value = log;
+            operands = [];
+            operators = [];
+            operations = 0;
+            inputField.value = "";
+        }
+    }
 });
